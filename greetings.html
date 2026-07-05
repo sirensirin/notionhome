@@ -166,20 +166,58 @@ setTimeout(dateTime, 500);
 dateTime()  
     
     
-(function(){
-  function setBodyBackground(){
-    try{
-      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.body.style.background = isDark ? '#191919' : '#ffffff';
-    } catch(e) {
-      document.body.style.background = '#ffffff';
-    }
-  }
-  if(window.matchMedia){
-    window.matchMedia('(prefers-color-scheme: dark)').addListener(setBodyBackground);
-  }
-  setBodyBackground();
-})();
+function mode() {
+	const currentTheme = localStorage.getItem('cat-data-theme');
+	console.log(currentTheme);
+	if (currentTheme == 'dark') {
+		light();
+	} else {
+		dark();
+	}
+}
+
+function light() {
+	localStorage.setItem('cat-data-theme', 'light');
+	document.documentElement.setAttribute('cat-data-theme', 'light');
+}
+
+function dark() {
+	localStorage.setItem('cat-data-theme', 'dark');
+	document.documentElement.setAttribute('cat-data-theme', 'dark');
+}
+
+let currentTheme = localStorage.getItem('cat-data-theme');
+
+if (currentTheme == 'light') {
+	light();
+} else {
+	dark();
+}
+*/
+
+// DYNAMIC THEME SETTINGS BASED ON OS PREFERENCE
+
+function light() {
+	document.documentElement.setAttribute('cat-data-theme', 'light');
+}
+
+function dark() {
+	document.documentElement.setAttribute('cat-data-theme', 'dark');
+}
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+	dark();
+} else {
+	light();
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+	if (event.matches) {
+		dark();
+	} else {
+		light();
+	}
+});
 // END
 </script>
 
