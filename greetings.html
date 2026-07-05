@@ -164,62 +164,25 @@ setTimeout(dateTime, 500);
 }
 
 dateTime()  
-    
-    
-function mode() {
-	const currentTheme = localStorage.getItem('cat-data-theme');
-	console.log(currentTheme);
-	if (currentTheme == 'dark') {
-		light();
-	} else {
-		dark();
-	}
-}
-
-function light() {
-	localStorage.setItem('cat-data-theme', 'light');
-	document.documentElement.setAttribute('cat-data-theme', 'light');
-}
-
-function dark() {
-	localStorage.setItem('cat-data-theme', 'dark');
-	document.documentElement.setAttribute('cat-data-theme', 'dark');
-}
-
-let currentTheme = localStorage.getItem('cat-data-theme');
-
-if (currentTheme == 'light') {
-	light();
-} else {
-	dark();
-}
-*/
-
-// DYNAMIC THEME SETTINGS BASED ON OS PREFERENCE
-
-function light() {
-	document.documentElement.setAttribute('cat-data-theme', 'light');
-}
-
-function dark() {
-	document.documentElement.setAttribute('cat-data-theme', 'dark');
-}
-
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-	dark();
-} else {
-	light();
-}
-
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
-	if (event.matches) {
-		dark();
-	} else {
-		light();
-	}
-});
 // END
 </script>
 
+(function () {
+  function setThemeBg(e) {
+    const isDark = e ? e.matches : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const bg = isDark ? '#191919' : '#ffffff';
+    document.documentElement.style.background = bg;
+    document.body.style.background = bg;
+  }
+
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  setThemeBg(mq);
+
+  if (mq.addEventListener) {
+    mq.addEventListener('change', setThemeBg);
+  } else if (mq.addListener) {
+    mq.addListener(setThemeBg);
+  }
+})();
 </body>
 </html>
