@@ -164,23 +164,7 @@ setTimeout(dateTime, 500);
 }
 
 dateTime()  
-(function () {
-  function setThemeBg(e) {
-    const isDark = e ? e.matches : window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const bg = isDark ? '#191919' : '#ffffff';
-    document.documentElement.style.background = bg;
-    document.body.style.background = bg;
-  }
 
-  const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  setThemeBg(mq);
-
-  if (mq.addEventListener) {
-    mq.addEventListener('change', setThemeBg);
-  } else if (mq.addListener) {
-    mq.addListener(setThemeBg);
-  }
-})();
 // END
 </script>
 
