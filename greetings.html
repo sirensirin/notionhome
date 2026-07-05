@@ -115,10 +115,12 @@ document.getElementById('date').innerHTML = today.toDateString();
 
 
 function clock() {
-var today = new Date();
-var hour = zeros(twelveHour(today.getHours()));
-var minutes = zeros(today.getMinutes());
-var seconds = zeros(today.getSeconds());
+  var today = new Date();
+  var hour = zeros(twelveHour(today.getHours()));
+  var minutes = zeros(today.getMinutes());
+  var seconds = zeros(today.getSeconds());
+  var greet = "";
+  var hrs = today.getHours();
 if(today.getHours() >=12){
     seconds+=" pm"
 }
@@ -165,12 +167,12 @@ setTimeout(dateTime, 500);
 
 dateTime()  
 
-(function(){
-  function setThemeBg(e){
+(function () {
+  function setThemeBg(e) {
     const isDark = e ? e.matches : window.matchMedia('(prefers-color-scheme: dark)').matches;
     const bg = isDark ? '#191919' : '#ffffff';
-    document.documentElement.style.background = bg;
-    document.body.style.background = bg;
+    document.documentElement.style.backgroundColor = bg;
+    document.body.style.backgroundColor = bg;
   }
 
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
